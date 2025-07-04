@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-md mx-auto mt-10 bg-white rounded-2xl shadow-xl p-6 border border-gray-200">
+    <div class="max-w-xl mx-auto mt-10 bg-white rounded-2xl shadow-xl p-6 border border-gray-200">
         <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">PDF File Upload</h2>
 
         <div class="mb-4">
