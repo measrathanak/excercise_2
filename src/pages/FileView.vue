@@ -4,38 +4,39 @@
 
         <div v-if="loading" class="text-center text-gray-500">Loading files...</div>
 
-        <div v-else-if="files.length === 0" class="text-center text-gray-500">
+        <div v-else-if="products.length === 0" class="text-center text-gray-500">
             No files uploaded yet.
         </div>
 
-        <ul v-else class="divide-y divide-gray-200">
-            <li v-for="file in files" :key="file" class="py-3 flex justify-between items-center">
-                <span class="text-sm text-gray-800">{{ file }}</span>
-                <a :href="fileUrl(file)" target="_blank"
-                    class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                    View
-                </a>
-            </li>
-        </ul>
+        <div class="grid grid-cols-4 gap-4">
+            <DocComponent v-for="(product,index) in products" :key="index" :product="product"  />
+        </div>
+
     </div>
 </template>
 
 <script>
+import DocComponent from '@/components/Documents/DocComponent.vue';
 import axios from 'axios';
 
 export default {
     name: 'FilesView',
     data() {
         return {
-            files: [],
+            products: [],
             loading: true,
         };
+    },
+    components:{
+        DocComponent
     },
     methods: {
         async fetchFiles() {
             try {
-                const res = await axios.get('http://172.23.1.130:3000/files');
-                this.files = res.data;
+                // const res = await axios.get('http://172.23.1.130:3000/files');
+                const res= await axios.get('https://fakestoreapi.com/products');
+                this.products = res.data;
+                console.log(this.products)
             } catch (err) {
                 console.error('Failed to fetch files:', err);
             } finally {
